@@ -8,7 +8,7 @@ const SuggestionSection = () => {
     <div className='bg-white rounded-xl border p-8 flex flex-col gap-7 h-fit'>
       <p className='text-blue-500 font-semibold'>People you may know</p>
       {[1, 2, 3, 4, 5].map((tab, i) => (
-        <div id={i} className='flex gap-4'>
+        <div key={i} className='flex gap-4'>
           <div>
           <Image
             src={Profile}
