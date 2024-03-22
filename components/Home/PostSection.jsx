@@ -4,7 +4,7 @@ const PostSection = () => {
     const posts = [
       {
         id: 1,
-        username: "user1",
+        username: "Gia Jakes",
         image:
           "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
         description:
@@ -19,7 +19,7 @@ const PostSection = () => {
       },
       {
         id: 2,
-        username: "user2",
+        username: "Jane Watson",
         image:
           "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
         description:
@@ -36,16 +36,28 @@ const PostSection = () => {
 
 
   return (
-    <div>
-        {
-            posts.map((post,index) => (
-                <div key={index}>
-                    
-                </div>
-            ))
-        }
+    <div className="flex flex-col gap-5">
+      {posts.map((post, index) => (
+        <div key={index} className="bg-white rounded-lg shadow-md p-6">
+          <div className="flex gap-4">
+            <img
+              src={post.image}
+              alt=""
+              className="w-12 h-12 cursor-pointer rounded-full object-cover"
+            ></img>
+            <div className="flex-1 flex flex-col gap-1 ">
+              <p className="font-semibold">{post.username}</p>
+              <p className="text-sm text-slate-400">435 Posts</p>
+            </div>
+          </div>
+
+          <p>
+            {}
+          </p>
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
 export default PostSection
