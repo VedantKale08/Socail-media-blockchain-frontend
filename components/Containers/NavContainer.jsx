@@ -10,7 +10,7 @@ const NavContainer = () => {
   return (
     <div>
       <Navbar />
-      <div className="grid grid-cols-[1fr,320px] px-10 py-8 bg-gray-200 h-[calc(100vh-90px)] gap-10">
+      <div className="grid grid-cols-[1fr,350px] px-14 py-8 bg-gray-200 h-[calc(100vh-90px)] gap-14 overflow-scroll">
         {tab === "Home" && <PostSection/>}
         {tab === "Trending" && <p>Trending</p>}
         {tab === "Profile" && <p>Profile</p>}
