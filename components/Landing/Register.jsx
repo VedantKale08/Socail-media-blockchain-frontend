@@ -3,13 +3,15 @@ import Image from "next/image";
 import React from "react";
 import AvatarReg from '../../public/assets/images/user.png' 
 import { Plus } from "lucide-react";
+import { Button } from "@mui/material";
 
 const Register = () => {
   return (
     <div className="h-screen overflow-hidden bg-black flex justify-center items-center text-white">
-      <div className="bg-[#16181c] w-[30vw] h-fit shadow-md rounded-lg p-8 flex flex-col gap-8">
+      <div className="bg-[#16181c] w-[30vw] h-fit shadow border border-slate-500 rounded-lg py-12 px-10 flex flex-col gap-8">
         {/* <p className="text-2xl font-bold ">DenZ</p> */}
-        <p className="text-2xl font-bold">Get Started</p>
+        <p className="text-3xl font-bold text-center">Get Started</p>
+        <p className="text-center -mt-6 text-gray-400">#Join the DenZ Revolution</p>
 
         <label className="m-auto relative flex justify-center" htmlFor="image">
           {false ? (
@@ -22,7 +24,7 @@ const Register = () => {
             <Image
               src={AvatarReg}
               alt=""
-              className="w-24 h-24 cursor-pointer rounded-full"
+              className="w-28 h-28 cursor-pointer rounded-full"
             ></Image>
           )}
           <Plus className="absolute bottom-0 right-2 text-white text-2xl bg-blue-500 rounded-full p-1 cursor-pointer" />
@@ -35,16 +37,38 @@ const Register = () => {
           />
         </label>
 
-        <div className="relative h-12 w-full">
-          <input
-            className="peer h-12 w-full rounded-[7px] border border-blue-gray-200 border-t bg-transparent px-3 py-2.5 font-sans text-base font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-white focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-            placeholder=" "
-          />
-          <label className="text-gray-500 before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-base peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-white peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-white peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-white peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-            Your Name
+        <div className="flex flex-col gap-3">
+          <label htmlFor="name" className="text-lg">
+            Name
           </label>
-          {/* <BsSearch className="h-5 w-5 absolute right-2 top-[10px] text-gray-500" /> */}
+          <input
+            type="text"
+            placeholder="e.g. Jonh Doe"
+            className="bg-transparent text-lg border border-slate-200 rounded-md px-5 py-3"
+          />
         </div>
+
+        <div className="flex flex-col gap-3">
+          <label htmlFor="name" className="text-lg">
+            Wallet address
+          </label>
+          <p className="bg-slate-900 opacity-45 text-lg border border-slate-200 rounded-md px-5 py-3">
+            0x7385693ac30c600147491d01a30c9da3a0f79481
+          </p>
+        </div>
+
+        <Button
+          style={{
+            backgroundColor: "rgb(59, 130, 246)",
+            color: "white",
+            paddingTop: "12px",
+            paddingBottom: "12px",
+            borderRadius: "999px",
+            fontSize: "14px",
+          }}
+        >
+          Connect
+        </Button>
       </div>
     </div>
   );
