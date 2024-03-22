@@ -9,7 +9,6 @@ const Register = () => {
   return (
     <div className="h-screen overflow-hidden bg-gray-200 flex justify-center items-center text-black">
       <div className="bg-white w-[30vw] h-fit shadow-lg border rounded-lg py-12 px-10 flex flex-col gap-8">
-        {/* <p className="text-2xl font-bold ">DenZ</p> */}
         <p className="text-3xl font-bold text-center">Get Started</p>
         <p className="text-center -mt-6 text-gray-400">#Join the DenZ Revolution</p>
 
