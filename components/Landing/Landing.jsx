@@ -16,7 +16,7 @@ const Landing = () => {
   };
   return (
     <>
-      <div className="h-screen overflow-hidden flex items-center flex-col">
+      <div className="h-screen overflow-hidden flex items-center flex-col bg-cover bg-landing">
         <div>
           <Lottie options={defaultOptions} height={600} width={600} />
         </div>
