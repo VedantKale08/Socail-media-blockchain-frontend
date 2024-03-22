@@ -16,12 +16,12 @@ const Landing = () => {
   };
   return (
     <>
-      <div className="h-screen overflow-hidden bg-black flex items-center flex-col">
+      <div className="h-screen overflow-hidden flex items-center flex-col">
         <div>
           <Lottie options={defaultOptions} height={600} width={600} />
         </div>
-        <div className="text-white font-bold text-4xl mt-10">
-          #Join the DenZ Revolution
+        <div className="text-black font-bold text-4xl mt-10">
+          <span className="text-blue-500">#Join</span> the DenZ Revolution
         </div>
         <div className="mt-10">
           <Button
