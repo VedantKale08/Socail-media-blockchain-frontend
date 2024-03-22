@@ -1,7 +1,7 @@
 import React from "react";
 import PopupContainer from "../Containers/PopUpContainer";
 import Lottie from "react-lottie";
-import * as animationData from "@/public/assets/lottie/landing.json";
+import * as animationData from "@/public/assets/lottie/reward.json";
 import { Button } from "@mui/material";
 
 const RewardPopup = ({ setPopup }) => {
