@@ -16,9 +16,9 @@ const Landing = () => {
   };
   return (
     <>
-      <div className="h-screen overflow-hidden flex items-center flex-col bg-cover bg-landing">
+      <div className="h-screen overflow-hidden flex items-center flex-col bg-cover bg-center bg-landing">
         <div>
-          <Lottie options={defaultOptions} height={600} width={600} />
+          <Lottie options={defaultOptions} height={500} width={500} />
         </div>
         <div className="text-black font-bold text-4xl mt-10">
           <span className="text-blue-500">#Join</span> the DenZ Revolution
