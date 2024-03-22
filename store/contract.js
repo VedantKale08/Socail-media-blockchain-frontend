@@ -14,10 +14,18 @@ export const contractStore = create(
   )
 );
 
-export const accountStore = create((set) => ({
-  account: "",
-  setAccount: (data) => set(() => ({ account: data })),
-}));
+export const accountStore = create(
+   persist(
+    (set) => ({
+      account: "",
+      setAccount: (data) => set(() => ({ account: data })),
+    }),
+    {
+      name: "account-storage", // Storage name
+      getStorage: () => sessionStorage, // Use sessionStorage
+    }
+  )  
+);
 
 export const providerStore = create((set) => ({
   provider: null,

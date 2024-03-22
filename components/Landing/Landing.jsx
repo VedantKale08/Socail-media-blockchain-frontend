@@ -50,7 +50,7 @@ const Landing = () => {
       setContract(localContract);
       console.log("Contract", localContract);
       setProvider(localProvider);
-
+        
       router.push("create-user");
     } else {
       toast.error("Metamask is not installed!!!!");

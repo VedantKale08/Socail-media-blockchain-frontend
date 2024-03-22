@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostSection from "./PostSection";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Profile = () => {
+   const [posts, setPosts] = useState([]);
+
+   useEffect(() => {
+     const getData = async () => {
+       try {
+         const data = await axios({
+           method: "get",
+           url: "http://localhost:5000/api/posts/0x7385693aC30c600147491d01a30c9Da3a0f79481",
+         });
+
+         console.log(data.data);
+         setPosts(data.data);
+       } catch (error) {
+         toast.error(error.error);
+         console.log(error);
+       }
+     };
+     getData();
+   }, []);
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-3 bg-white rounded-lg shadow-md p-8 h-fit">
@@ -19,7 +40,7 @@ const Profile = () => {
       </div>
 
     <p className="text-blue-500 text-2xl mt-5 font-semibold bg-white mb-3 px-8 py-4 shadow-md rounded-lg">My Posts</p>
-      <PostSection />
+      <PostSection posts={posts}/>
     </div>
   );
 };
