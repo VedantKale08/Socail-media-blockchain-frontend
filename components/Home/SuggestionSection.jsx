@@ -1,12 +1,31 @@
 import React from 'react'
+import Profile from '../../public/assets/images/profile.jpg'
+import Image from "next/image"
+import {CirclePlus} from 'lucide-react'
 
 const SuggestionSection = () => {
   return (
-    <div className=''>
-        <div className='bg-white rounded-xl border p-8 flex flex-col gap-3'>
-            <p className='text-blue-500 font-semibold'>People you may know</p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quaerat molestias, a modi, adipisci ut maxime ipsa dicta dignissimos blanditiis numquam magnam tempora quisquam atque quae. Porro corporis quos veniam ducimus, tempora earum perspiciatis quam optio obcaecati necessitatibus, suscipit nesciunt placeat exercitationem? Laborum dignissimos praesentium adipisci saepe quam rem deserunt repellat sed voluptatem beatae, ut quidem, ducimus error nisi est. Veniam nemo blanditiis sequi cumque? Dicta debitis suscipit iusto accusantium corporis eaque harum, et libero officiis, consequatur mollitia error enim nobis? Nisi cumque velit nihil deserunt? Similique nemo quas ut voluptas cum qui dicta accusamus, debitis saepe ullam vero ex?
+    <div className='bg-white rounded-xl border p-8 flex flex-col gap-7 h-fit'>
+      <p className='text-blue-500 font-semibold'>People you may know</p>
+      {[1, 2, 3, 4, 5].map((tab, i) => (
+        <div id={i} className='flex gap-4'>
+          <div>
+          <Image
+            src={Profile}
+            alt=""
+            className="w-12 h-12 cursor-pointer rounded-full object-cover"
+          ></Image>
+          </div>
+          <div className='flex-1 flex flex-col gap-1 '>
+            <p className='font-semibold'>Blake Blossom</p>
+            <p className='text-sm text-slate-400'>435 Posts</p>
+          </div>
+          <div className='flex justify-center items-center flex-col gap-1 text-slate-400'>
+             <CirclePlus size={15}/>
+             <p className='text-sm'>Add</p>
+          </div>
         </div>
+      ))}
     </div>
   )
 }
