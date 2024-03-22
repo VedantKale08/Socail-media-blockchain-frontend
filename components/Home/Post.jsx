@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Heart, Share2, MessageCircleMore } from "lucide-react";
-import { Button } from "@mui/material";
+import ReactPlayer from "react-player";
 
 const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
@@ -21,7 +21,24 @@ const Post = ({ post }) => {
 
       {/* content section */}
       <p>{post.description}</p>
-      <img src={post.post_image} alt="" className="rounded-lg w-[80%] m-auto" />
+      {post.post_type === "image" ? (
+        <img
+          src={post.post_data}
+          alt=""
+          className="rounded-lg w-[80%] m-auto"
+        />
+      ) : (
+        <ReactPlayer
+          url="/assets/images/video.mp4"
+          playing
+          muted
+          loop
+          controls={false}
+          light={false}
+          pip={true}
+          style={{width: '80%', margin:"auto"}}
+        />
+      )}
 
       {/* interaction section */}
       <div className="mt-3 flex justify-between items-center">
@@ -51,7 +68,9 @@ const Post = ({ post }) => {
               placeholder="Enter Comment"
               className="w-full outline-none border px-4 py-3 rounded-lg text-lg"
             />
-            <button className="bg-blue-500 text-white px-3 rounded-lg">Comment</button>
+            <button className="bg-blue-500 text-white px-3 rounded-lg">
+              Comment
+            </button>
           </div>
 
           {post.comments.map((comment, index) => (
