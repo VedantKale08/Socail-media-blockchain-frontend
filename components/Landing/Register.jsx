@@ -116,7 +116,7 @@ const Register = () => {
           <label htmlFor="name" className="text-lg">
             Wallet address
           </label>
-          <p className="bg-slate-300 text-black opacity-45 text-lg border border-slate-500 rounded-md px-5 py-3">
+          <p className="bg-slate-300 text-black opacity-45 text-lg border border-slate-500 rounded-md px-5 py-3 line-clamp-3">
             {account}
           </p>
         </div>

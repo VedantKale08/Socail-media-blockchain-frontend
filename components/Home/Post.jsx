@@ -1,9 +1,33 @@
 import React, { useState } from "react";
 import { Heart, Share2, MessageCircleMore } from "lucide-react";
 import ReactPlayer from "react-player";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
+  const [likes, setLikes] = useState(post.likes.length);
+
+  const likePost = async () => {
+    try {
+      const data = await axios.post(
+        `http://localhost:5000/api/posts/${post._id}/like`,
+        { userId: "0x7385693aC30c600147491d01a30c9Da3a0f79481" }
+      );
+
+      console.log(data.data);
+      setLikes((prev)=>prev+1);
+      // toast.success("Post liked successfully");
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("An error occurred while liking the post");
+      }
+      console.error(error);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-3 bg-white rounded-lg shadow-md  p-8">
       {/* user section */}
@@ -21,9 +45,13 @@ const Post = ({ post }) => {
 
       {/* content section */}
       <p>{post.description}</p>
-      {post.post_type === "image" ? (
+      {post.contentType === "image" ? (
         <img
-          src={post.post_data}
+          src={
+            !post.content.startsWith("ipfs")
+              ? post.content
+              : `https://gateway.pinata.cloud/ipfs${post.content.substring(6)}`
+          }
           alt=""
           className="rounded-lg w-[80%] m-auto"
         />
@@ -36,15 +64,15 @@ const Post = ({ post }) => {
           controls={false}
           light={false}
           pip={true}
-          style={{width: '80%', margin:"auto"}}
+          style={{ width: "80%", margin: "auto" }}
         />
       )}
 
       {/* interaction section */}
       <div className="mt-3 flex justify-between items-center">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center" onClick={likePost}>
           <Heart className="cursor-pointer" size={32} />
-          <p>{post.no_of_likes} others like this post</p>
+          <p>{likes} others like this post</p>
         </div>
         <div className="flex gap-3">
           <MessageCircleMore
