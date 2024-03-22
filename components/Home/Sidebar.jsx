@@ -1,12 +1,14 @@
 "use client"
-import React, { useMemo } from "react";
+import React, { useMemo,useState } from "react";
 import DenZLogo from "../../public/assets/images/logo.png";
 import Image from "next/image";
-import { Home, TrendingUp, User, Settings, LogOut, Plus } from "lucide-react";
+import { Home, TrendingUp, User, Settings, LogOut, BellRing,MessageSquareMore,Album} from "lucide-react";
 import { Button } from "@mui/material";
 import { tabsStore } from "@/store/tabState";
+import AddPost from "./AddPost";
 
 const Sidebar = () => {
+  const [popup,setPopup] = useState(false)
   const setTab = tabsStore((state) => state.setTab);
   const tab = tabsStore((state) => state.tab);
   const tabs = useMemo(
@@ -24,9 +26,21 @@ const Sidebar = () => {
         icon: User,
       },
       {
+        name: "Messages",
+        icon: MessageSquareMore,
+      },
+      {
+        name: "Bookmarks",
+        icon: Album,
+      },
+      {
+        name: "Notifications",
+        icon: BellRing,
+      },
+      {
         name: "Settings",
         icon: Settings,
-      },
+      }
     ],
     []
   );
@@ -58,6 +72,7 @@ const Sidebar = () => {
             fontSize: "16px",
             fontWeight: "semibold",
           }}
+          onClick={()=>setPopup(true)}
         >
           Post
         </Button>
@@ -66,6 +81,7 @@ const Sidebar = () => {
           <p className="text-lg">Log out</p>
         </div>
       </div>
+      {popup && <AddPost setPopup={setPopup}/>}
     </div>
   );
 };
