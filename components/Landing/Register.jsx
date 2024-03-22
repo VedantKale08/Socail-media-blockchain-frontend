@@ -7,8 +7,8 @@ import { Button } from "@mui/material";
 
 const Register = () => {
   return (
-    <div className="h-screen overflow-hidden bg-black flex justify-center items-center text-white">
-      <div className="bg-[#16181c] w-[30vw] h-fit shadow border border-slate-500 rounded-lg py-12 px-10 flex flex-col gap-8">
+    <div className="h-screen overflow-hidden bg-gray-200 flex justify-center items-center text-black">
+      <div className="bg-white w-[30vw] h-fit shadow-lg border rounded-lg py-12 px-10 flex flex-col gap-8">
         {/* <p className="text-2xl font-bold ">DenZ</p> */}
         <p className="text-3xl font-bold text-center">Get Started</p>
         <p className="text-center -mt-6 text-gray-400">#Join the DenZ Revolution</p>
@@ -44,7 +44,7 @@ const Register = () => {
           <input
             type="text"
             placeholder="e.g. Jonh Doe"
-            className="bg-transparent text-lg border border-slate-200 rounded-md px-5 py-3"
+            className="bg-transparent text-lg border border-slate-400 rounded-md px-5 py-3"
           />
         </div>
 
@@ -52,7 +52,7 @@ const Register = () => {
           <label htmlFor="name" className="text-lg">
             Wallet address
           </label>
-          <p className="bg-slate-900 opacity-45 text-lg border border-slate-200 rounded-md px-5 py-3">
+          <p className="bg-slate-300 text-black opacity-45 text-lg border border-slate-500 rounded-md px-5 py-3">
             0x7385693ac30c600147491d01a30c9da3a0f79481
           </p>
         </div>
