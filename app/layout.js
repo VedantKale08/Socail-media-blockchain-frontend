@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Toaster position="top-right" reverseOrder={false} />
-      <body className={poppins.variable}>{children}</body>
       <body className={poppins.variable}>
         <RewardContainer>{children}</RewardContainer>
       </body>

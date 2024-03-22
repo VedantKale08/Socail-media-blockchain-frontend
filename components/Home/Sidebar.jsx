@@ -1,16 +1,30 @@
-"use client"
-import React, { useMemo,useState } from "react";
+"use client";
+import React, { useMemo, useState } from "react";
 import DenZLogo from "../../public/assets/images/logo.png";
 import Image from "next/image";
-import { Home, TrendingUp, User, Settings, LogOut, BellRing,MessageSquareMore,Album} from "lucide-react";
+import {
+  Home,
+  TrendingUp,
+  User,
+  Settings,
+  LogOut,
+  BellRing,
+  MessageSquareMore,
+  Album,
+} from "lucide-react";
 import { Button } from "@mui/material";
 import { tabsStore } from "@/store/tabState";
 import AddPost from "./AddPost";
+import { contractStore } from "@/store/contract";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
-  const [popup,setPopup] = useState(false)
+  const [popup, setPopup] = useState(false);
   const setTab = tabsStore((state) => state.setTab);
   const tab = tabsStore((state) => state.tab);
+  const contract = contractStore((state) => state.contract);
+  const router = useRouter();
   const tabs = useMemo(
     () => [
       {
@@ -40,10 +54,21 @@ const Sidebar = () => {
       {
         name: "Settings",
         icon: Settings,
-      }
+      },
     ],
     []
   );
+
+  const logoutUser = async () => {
+    console.log("Hello");
+    try {
+      await contract.logout();
+      router.push("create-user");
+    } catch (error) {
+      toast.error("Unable to logout");
+      console.log(error);
+    }
+  };
   return (
     <div className="border h-screen sticky top-0 flex flex-col">
       <Image src={DenZLogo} alt="" className="w-[80%]"></Image>
@@ -52,7 +77,7 @@ const Sidebar = () => {
           <div
             key={i}
             className={`flex gap-3 p-4 items-center transition-all hover:bg-gray-200 cursor-pointer rounded-md ${
-              tab === tabObj.name ? 'bg-gray-200' : 'bg-white'
+              tab === tabObj.name ? "bg-gray-200" : "bg-white"
             }`}
             onClick={() => setTab(tabObj.name)}
           >
@@ -72,16 +97,19 @@ const Sidebar = () => {
             fontSize: "16px",
             fontWeight: "semibold",
           }}
-          onClick={()=>setPopup(true)}
+          onClick={() => setPopup(true)}
         >
           Post
         </Button>
-        <div className="flex w-full gap-3 p-4 items-center transition-all hover:bg-gray-200 cursor-pointer rounded-md">
+        <div
+          className="flex w-full gap-3 p-4 items-center transition-all hover:bg-gray-200 cursor-pointer rounded-md"
+          onClick={logoutUser}
+        >
           <LogOut size={25} />
           <p className="text-lg">Log out</p>
         </div>
       </div>
-      {popup && <AddPost setPopup={setPopup}/>}
+      {popup && <AddPost setPopup={setPopup} />}
     </div>
   );
 };

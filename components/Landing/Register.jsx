@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AvatarReg from "../../public/assets/images/user.png";
 import { Plus } from "lucide-react";
 import { Button } from "@mui/material";
@@ -35,10 +35,8 @@ const Register = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(response);
         const imageHash = `ipfs://${response.data.IpfsHash}`;
         try {
-          console.log(account);
           console.log("Image", imageHash);
           await contract.createUser(userName, imageHash);
           router.push("home");
@@ -63,6 +61,19 @@ const Register = () => {
     };
     setFileName(data?.name);
   };
+
+  useEffect(() => {
+    const isLoggedIn = async () => {
+      try {
+        const isLoggedIn = await contract.login().toString();
+        // console.log("Hello", await isLoggedIn);
+        if (isLoggedIn) router.push("home");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    contract && isLoggedIn();
+  }, []);
 
   return (
     <div className="h-screen overflow-hidden bg-gray-200 flex justify-center items-center text-black">

@@ -36,7 +36,7 @@ const Post = ({ post }) => {
           controls={false}
           light={false}
           pip={true}
-          style={{width: '80%', margin:"auto"}}
+          style={{ width: "80%", margin: "auto" }}
         />
       )}
 
