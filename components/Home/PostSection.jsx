@@ -26,7 +26,7 @@ const PostSection = () => {
         "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
       description:
         "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur eu odio vitae arcu cursus vestibulum. Proin ut quam vitae velit pretium convallis. Ut sed lorem eget sem dictum fermentum. Nullam faucibus feugiat sapien, et lobortis ligula tincidunt id. Integer luctus, nulla nec suscipit tempor, ipsum felis varius purus, vel fermentum purus leo sit amet libero. Mauris sed mi vel justo ultricies tristique. Nulla ultrices urna id lectus aliquet auctor.",
-      post_type: "image",
+      post_type: "video",
       post_data:
         "https://campustechnology.com/-/media/EDU/CampusTechnology/2020-images/20200227hackathon.jpg",
       no_of_likes: 20,
@@ -42,7 +42,7 @@ const PostSection = () => {
         "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
       description:
         "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur eu odio vitae arcu cursus vestibulum. Proin ut quam vitae velit pretium convallis. Ut sed lorem eget sem dictum fermentum. Nullam faucibus feugiat sapien, et lobortis ligula tincidunt id. Integer luctus, nulla nec suscipit tempor, ipsum felis varius purus, vel fermentum purus leo sit amet libero. Mauris sed mi vel justo ultricies tristique. Nulla ultrices urna id lectus aliquet auctor.",
-      post_type: "video",
+      post_type: "image",
       post_data:
         "https://campustechnology.com/-/media/EDU/CampusTechnology/2020-images/20200227hackathon.jpg",
       no_of_likes: 20,
