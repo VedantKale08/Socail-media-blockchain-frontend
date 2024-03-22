@@ -5,6 +5,7 @@ import SuggestionSection from '../Home/SuggestionSection'
 import { tabsStore } from '@/store/tabState';
 import PostSection from '../Home/PostSection';
 import Trending from '../Home/Trending';
+import ComingSoon from '../Home/ComingSoon';
 import Profile from '../Home/Profile';
 
 const NavContainer = () => {
@@ -16,7 +17,10 @@ const NavContainer = () => {
         {tab === "Home" && <PostSection/>}
         {tab === "Trending" && <Trending/>}
         {tab === "Profile" && <Profile/>}
-        {tab === "Settings" && <p>Settings</p>}
+        {tab === "Settings" && <ComingSoon/>}
+        {tab === "Messages" && <ComingSoon/>}
+        {tab === "Bookmarks" && <ComingSoon/>}
+        {tab === "Notifications" && <ComingSoon/>}
         <SuggestionSection />
       </div>
     </div>
