@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import { contractStore } from "@/store/contract";
 import { ethers } from "ethers";
 
-const RewardPopup = ({ setPopup }) => {
+const RewardPopup = ({ setPopup, text }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -47,6 +47,7 @@ const RewardPopup = ({ setPopup }) => {
         <div className="text-xl">
           You got 0.30 ethers for viewing the website for 30 minutes
         </div>
+        <div className="text-xl">{text}</div>
         <div>
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>

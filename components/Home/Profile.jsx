@@ -6,7 +6,26 @@ import { userStore } from "@/store/userStore";
 
 const Profile = () => {
    const [posts, setPosts] = useState([]);
+   const [likes, setLikes] = useState(0);
   const user = userStore((state) => state.user);
+  const setUser = userStore((state) => state.setUser);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await axios({
+          method: "get",
+          url: `http://localhost:5000/api/users/${user.data.userId}/total-likes`,
+        });
+
+        setLikes(data.data.totalLikesCount);           
+      } catch (error) {
+        toast.error(error.error);
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
 
    useEffect(() => {
      const getData = async () => {
@@ -25,6 +44,7 @@ const Profile = () => {
      };
      getData();
    }, []);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-3 bg-white rounded-lg shadow-md p-8 h-fit">
@@ -39,7 +59,8 @@ const Profile = () => {
           <div className="flex-1 flex flex-col gap-1 justify-center">
             <p className="font-semibold text-3xl">{user.data.name}</p>
             <p className="text-sm text-slate-400 text-xl">
-              {user.totalPosts} Posts
+              {user.totalPosts} Posts &#46; {user.data.followers} Followers
+              &#46; {likes} Total likes
             </p>
           </div>
         </div>
