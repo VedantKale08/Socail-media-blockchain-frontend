@@ -33,6 +33,7 @@ const Landing = () => {
         setAccount(address);
 
         const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+        router.push("/create-user");
         const localContract = new ethers.Contract(
           contractAddress,
           SocialMedia.abi,
