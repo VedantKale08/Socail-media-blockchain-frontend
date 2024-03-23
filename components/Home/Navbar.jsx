@@ -5,9 +5,11 @@ import AvatarReg from '../../public/assets/images/user.png'
 import Image from "next/image"
 import { Tooltip, IconButton } from "@mui/material"
 import { tabsStore } from '@/store/tabState'
+import { userStore } from '@/store/userStore'
 
 const Navbar = () => {
   const setTab = tabsStore((state) => state.setTab);
+  const user = userStore((state) => state.user);
 
   return (
     <div className="border h-[90px] top-0 bg-white flex justify-end items-center z-40">
@@ -23,12 +25,12 @@ const Navbar = () => {
           </Tooltip>
         </div>
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setTab("Profile")}>
-          <Image
-            src={AvatarReg}
+          <img
+            src={`https://gateway.pinata.cloud/ipfs${user.data.image.substring(6)}`}
             alt=""
             className="w-12 h-12 rounded-full"
-          ></Image>
-          <p className="font-bold text-lg">Code of Duty</p>
+          ></img>
+          <p className="font-bold text-lg">{user.data.name}</p>
         </div>
       </div>
     </div>
