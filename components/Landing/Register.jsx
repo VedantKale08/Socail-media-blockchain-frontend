@@ -20,6 +20,10 @@ const Register = () => {
   const router = useRouter();
 
   const setUser = userStore((state) => state.setUser);
+  
+  if (JSON.parse(sessionStorage.getItem("user-storage")).state.user) {
+    router.push("/home");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
