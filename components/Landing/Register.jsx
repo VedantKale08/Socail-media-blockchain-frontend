@@ -66,8 +66,7 @@ const Register = () => {
     const isLoggedIn = async () => {
       try {
         const isLoggedIn = await contract.login().toString();
-        // console.log("Hello", await isLoggedIn);
-        if (isLoggedIn) router.push("home");
+        if (isLoggedIn == true) router.push("home");
       } catch (error) {
         console.log(error);
       }
