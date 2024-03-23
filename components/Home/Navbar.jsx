@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { BellRing, Coins } from "lucide-react";
-import AvatarReg from "../../public/assets/images/user.png";
-import Image from "next/image";
 import { Tooltip, IconButton } from "@mui/material";
 import { tabsStore } from "@/store/tabState";
 import { userStore } from "@/store/userStore";
@@ -10,7 +8,6 @@ import { userStore } from "@/store/userStore";
 const Navbar = () => {
   const setTab = tabsStore((state) => state.setTab);
   const user = userStore((state) => state.user);
-  console.log(user);
 
   return (
     <div className="border h-[90px] top-0 bg-white flex justify-end items-center z-40">

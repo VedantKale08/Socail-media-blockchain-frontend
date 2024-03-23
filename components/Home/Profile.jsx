@@ -3,10 +3,12 @@ import PostSection from "./PostSection";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { userStore } from "@/store/userStore";
+import RewardPopup from "./RewardPopup";
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState(0);
+  const [popup, setPopup] = useState(false);
   const user = userStore((state) => state.user);
 
   useEffect(() => {
@@ -44,6 +46,13 @@ const Profile = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    if (likes && likes >= 50 && likes % 50 === 0) {
+      setPopup(true);
+      setText(`You got 0.005 ethers for gaining ${likes} likes`);
+    }
+  }, []);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-3 bg-white rounded-lg shadow-md p-8 h-fit">
@@ -69,6 +78,7 @@ const Profile = () => {
         My Posts
       </p>
       <PostSection posts={posts} />
+      {popup && <RewardPopup setPopup={setPopup} text={text} />}
     </div>
   );
 };

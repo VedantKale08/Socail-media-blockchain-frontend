@@ -12,9 +12,11 @@ const RewardContainer = ({ children }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeSpent((prevTimeSpent) => {
-        if (prevTimeSpent >= 1800 && prevTimeSpent % 1800 == 0) {
+        if (prevTimeSpent >= 50 && prevTimeSpent % 50 == 0) {
           setPopup(true);
-          setText("You got 0.05 ethers for viewing the website for 30 minutes");
+          setText(
+            "You got 0.005 ethers for viewing the website for 30 minutes"
+          );
         }
         return prevTimeSpent + 1;
       });
@@ -29,8 +31,23 @@ const RewardContainer = ({ children }) => {
     if (user && user.data.followers >= 50 && user.data.followers % 50 === 0) {
       setPopup(true);
       setText(
-        `You got 0.03 ethers for gaining ${user.data.followers} followers`
+        `You got 0.005 ethers for gaining ${user.data.followers} followers`
       );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      user &&
+      user.followers >= 1000 &&
+      user.totalPosts >= 10 &&
+      user.totalPosts % 10 === 0
+    ) {
+      setPopup(true);
+      setText(`You got 0.005 ethers for posting ${user.totalPosts} posts`);
+    } else if (user && user.totalPosts >= 20 && user.totalPosts % 20 === 0) {
+      setPopup(true);
+      setText(`You got 0.005 ethers for posting ${user.totalPosts} posts`);
     }
   }, []);
 

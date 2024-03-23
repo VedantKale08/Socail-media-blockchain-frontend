@@ -6,8 +6,6 @@ import { ethers } from "ethers";
 
 const TipPopup = ({ post, setPopup }) => {
   const [ether, setEther] = useState("");
-  const contract = contractStore((state) => state.contract);
-  console.log(post);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
