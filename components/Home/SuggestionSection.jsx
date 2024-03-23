@@ -17,7 +17,7 @@ const SuggestionSection = () => {
           ></Image>
           </div>
           <div className='flex-1 flex flex-col gap-1 '>
-            <p className='font-semibold'>Blake Blossom</p>
+            <p className='font-semibold'>Radhika Merchant</p>
             <p className='text-sm text-slate-400'>435 Posts</p>
           </div>
           <div className='flex justify-center items-center flex-col gap-1 text-slate-400'>
