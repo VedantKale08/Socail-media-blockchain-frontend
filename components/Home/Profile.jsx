@@ -3,11 +3,13 @@ import PostSection from "./PostSection";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { userStore } from "@/store/userStore";
+import { accountStore } from "@/store/contract";
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState(0);
   const user = userStore((state) => state.user);
+  const account = accountStore((state) => state.account);
 
   useEffect(() => {
     const getData = async () => {
@@ -31,7 +33,7 @@ const Profile = () => {
       try {
         const data = await axios({
           method: "get",
-          url: "http://localhost:5000/api/posts/0x7385693aC30c600147491d01a30c9Da3a0f79481",
+          url: `http://localhost:5000/api/posts/${account}`,
         });
 
         console.log(data.data);

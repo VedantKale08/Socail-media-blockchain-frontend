@@ -10,7 +10,8 @@ import { userStore } from '@/store/userStore'
 const Navbar = () => {
   const setTab = tabsStore((state) => state.setTab);
   const user = userStore((state) => state.user);
-  console.log(user);
+  console.log(user)
+  ;
 
   return (
     <div className="border h-[90px] top-0 bg-white flex justify-end items-center z-40">

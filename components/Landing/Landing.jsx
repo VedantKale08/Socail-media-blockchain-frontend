@@ -41,7 +41,15 @@ const Landing = () => {
         setContract(localContract);
         console.log("Contract", localContract);
         setProvider(provider);
-        router.push("/create-user");
+
+        const data = await axios({
+          method: "get",
+          url: "http://localhost:5000/api/user/" + address,
+        });
+
+        console.log(data);
+
+        // router.push("/create-user");
       } catch (error) {
         console.error(error);
         // Handle error
