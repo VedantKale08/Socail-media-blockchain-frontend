@@ -1,11 +1,18 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Lottie from "react-lottie";
+import { ethers } from "ethers";
 import * as animationData from "@/public/assets/lottie/landing.json";
 import { Button } from "@mui/material";
-
+import SocialMedia from "../../app/artifacts/contracts/SocialMedia.sol/SocialMedia.json";
+import { useRouter } from "next/navigation";
+import { accountStore, contractStore, providerStore } from "@/store/contract";
 
 const Landing = () => {
+  const setContract = contractStore((state) => state.setContract);
+  const setAccount = accountStore((state) => state.setAccount);
+  const setProvider = providerStore((state) => state.setProvider);
+  const router = useRouter();
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -14,6 +21,42 @@ const Landing = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  const connectWallet = async () => {
+    const localProvider = new ethers.BrowserProvider(window.ethereum);
+    if (localProvider) {
+      // To handle the account changes in the metamask wallet
+      // window.ethereum.on("chainChanged", () => {
+      //   window.location.reload();
+      // });
+
+      // window.ethereum.on("accountsChanged", () => {
+      //   window.location.reload();
+      // });
+
+      await localProvider.send("eth_requestAccounts", []);
+      const signer = await localProvider.getSigner();
+      const address = await signer.getAddress();
+      console.log(address);
+      setAccount(address);
+      let contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+
+      const localContract = new ethers.Contract(
+        contractAddress,
+        SocialMedia.abi,
+        signer
+      );
+      // await contract.login();
+      setContract(localContract);
+      console.log("Contract", localContract);
+      setProvider(localProvider);
+        
+      router.push("create-user");
+    } else {
+      toast.error("Metamask is not installed!!!!");
+    }
+  };
+
   return (
     <>
       <div className="h-screen overflow-hidden flex items-center flex-col bg-cover bg-center bg-landing">
@@ -36,6 +79,7 @@ const Landing = () => {
               fontSize: "20px",
               fontWeight: "bold",
             }}
+            onClick={connectWallet}
           >
             Connect
           </Button>

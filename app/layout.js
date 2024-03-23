@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 import RewardContainer from "@/components/Containers/RewardContainer";
 
 const poppins = Poppins({
@@ -17,10 +18,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Toaster position="top-right" reverseOrder={false} />
+      {/* <body className={poppins.variable}>{children}</body> */}
       <body className={poppins.variable}>
-        <RewardContainer>
-          {children}
-        </RewardContainer>
+        <RewardContainer>{children}</RewardContainer>
       </body>
     </html>
   );

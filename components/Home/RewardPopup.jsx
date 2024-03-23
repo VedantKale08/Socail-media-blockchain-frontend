@@ -4,7 +4,7 @@ import Lottie from "react-lottie";
 import * as animationData from "@/public/assets/lottie/reward.json";
 import { Button } from "@mui/material";
 
-const RewardPopup = ({ setPopup }) => {
+const RewardPopup = ({ setPopup,text }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -18,7 +18,7 @@ const RewardPopup = ({ setPopup }) => {
     <PopupContainer setPopup={setPopup} bgClose={false}>
       <div className="bg-white w-[35vw] rounded-lg shadow-lg p-8 flex flex-col items-center">
         <p className="text-blue-500 font-bold text-4xl mb-5">Hooray!!! </p>
-        <div className="text-xl">You got 0.30 ethers for viewing the website for 30 minutes</div>
+        <div className="text-xl">{text}</div>
         <div>
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>
@@ -30,7 +30,7 @@ const RewardPopup = ({ setPopup }) => {
             borderRadius: "10px",
             fontSize: "16px",
             fontWeight: "semibold",
-            width:"100%"
+            width: "100%",
           }}
           onClick={() => setPopup(false)}
         >
