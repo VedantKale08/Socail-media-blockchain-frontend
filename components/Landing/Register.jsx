@@ -8,6 +8,7 @@ import { accountStore, contractStore } from "@/store/contract";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { userStore } from "@/store/userStore";
 
 const Register = () => {
   const contract = contractStore((state) => state.contract);
@@ -17,6 +18,8 @@ const Register = () => {
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("No image selected");
   const router = useRouter();
+
+  const setUser = userStore((state) => state.setUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +44,20 @@ const Register = () => {
           console.log(account);
           console.log("Image", imageHash);
           await contract.createUser(userName, imageHash);
+
+          const data = await axios({
+            method: "post",
+            url: "http://localhost:5000/api/users",
+            data: {
+              userId: account,
+              name: userName,
+              image: imageHash,
+            },
+          });
+
+          console.log(data.data);
+          setUser(data.data);
+
           router.push("home");
         } catch (error) {
           console.log("Errorrrrr", error);
@@ -76,9 +93,9 @@ const Register = () => {
         </p>
         {/* <form action="" onSubmit={handleSubmit}> */}
         <label className="m-auto relative flex justify-center" htmlFor="image">
-          {false ? (
+          {file ? (
             <img
-              src={image}
+              src={URL.createObjectURL(file)}
               alt=""
               className="w-24 h-24 cursor-pointer rounded-full object-cover bg-center"
             />

@@ -54,6 +54,7 @@ const AddPost = ({ setPopup }) => {
 
             console.log(data);
             setPopup(false);
+            window.location.reload();
 
           } catch (error) {
             toast.error(error.error)
