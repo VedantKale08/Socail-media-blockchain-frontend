@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { userStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
+import { accountStore } from "@/store/contract";
 
 const Post = ({ post }) => {
   const user = userStore((state) => state.user);
@@ -13,19 +14,19 @@ const Post = ({ post }) => {
   const [allComments, setAllComments] = useState(post.comments);
   const [comment, setComment] = useState("");
   const router = useRouter();
+  const account = accountStore((state) => state.account);
 
   const likePost = async () => {
     try {
       if (
-        (post.likes.length > 0 &&
-          post.likes[0] === "0x7385693aC30c600147491d01a30c9Da3a0f79481") ||
+        (post.likes.length > 0 && post.likes[0] === account) ||
         likes > post.likes.length
       ) {
         return;
       }
       const data = await axios.post(
         `http://localhost:5000/api/posts/${post._id}/like`,
-        { userId: "0x7385693aC30c600147491d01a30c9Da3a0f79481" }
+        { userId: account }
       );
 
       console.log(data.data);
@@ -46,7 +47,7 @@ const Post = ({ post }) => {
       const data = await axios.post(
         `http://localhost:5000/api/posts/${post._id}/comment`,
         {
-          owner: "0x7385693aC30c600147491d01a30c9Da3a0f79481",
+          owner: account,
           content: comment,
         }
       );
@@ -144,17 +145,13 @@ const Post = ({ post }) => {
         <div className="flex gap-2 items-center" onClick={likePost}>
           <Heart
             fill={
-              (post.likes !== 0 &&
-                post.likes[0] ===
-                  "0x7385693aC30c600147491d01a30c9Da3a0f79481") ||
+              (post.likes !== 0 && post.likes[0] === account) ||
               likes > post.likes.length
                 ? "red"
                 : "none"
             }
             stroke={
-              (post.likes !== 0 &&
-                post.likes[0] ===
-                  "0x7385693aC30c600147491d01a30c9Da3a0f79481") ||
+              (post.likes !== 0 && post.likes[0] === account) ||
               likes > post.likes.length
                 ? "red"
                 : "black"

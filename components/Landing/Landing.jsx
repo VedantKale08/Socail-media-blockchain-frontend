@@ -40,6 +40,7 @@ const Landing = () => {
       console.log(address);
       setAccount(address);
       let contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+      router.push("create-user");
 
       const localContract = new ethers.Contract(
         contractAddress,
@@ -48,10 +49,8 @@ const Landing = () => {
       );
       // await contract.login();
       setContract(localContract);
-      console.log("Contract", localContract);
+      // console.log("Contract", localContract);
       setProvider(localProvider);
-        
-      router.push("create-user");
     } else {
       toast.error("Metamask is not installed!!!!");
     }
