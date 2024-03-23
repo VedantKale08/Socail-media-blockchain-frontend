@@ -7,6 +7,7 @@ import PostSection from '../Home/PostSection';
 import Trending from '../Home/Trending';
 import ComingSoon from '../Home/ComingSoon';
 import Profile from '../Home/Profile';
+import Analytics from '../Home/Analytics';
 
 const NavContainer = () => {
   const tab = tabsStore((state) => state.tab);
@@ -21,6 +22,7 @@ const NavContainer = () => {
         {tab === "Messages" && <ComingSoon/>}
         {tab === "Bookmarks" && <ComingSoon/>}
         {tab === "Notifications" && <ComingSoon/>}
+        {tab === "Analytics" && <Analytics/>}
         <SuggestionSection />
       </div>
     </div>
