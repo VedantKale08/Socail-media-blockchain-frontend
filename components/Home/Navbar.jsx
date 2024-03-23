@@ -1,11 +1,11 @@
-"use client"
-import React from 'react'
-import { BellRing, Coins } from 'lucide-react'
-import AvatarReg from '../../public/assets/images/user.png'
-import Image from "next/image"
-import { Tooltip, IconButton } from "@mui/material"
-import { tabsStore } from '@/store/tabState'
-import { userStore } from '@/store/userStore'
+"use client";
+import React from "react";
+import { BellRing, Coins } from "lucide-react";
+import AvatarReg from "../../public/assets/images/user.png";
+import Image from "next/image";
+import { Tooltip, IconButton } from "@mui/material";
+import { tabsStore } from "@/store/tabState";
+import { userStore } from "@/store/userStore";
 
 const Navbar = () => {
   const setTab = tabsStore((state) => state.setTab);
@@ -25,17 +25,22 @@ const Navbar = () => {
             <Coins />
           </Tooltip>
         </div>
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setTab("Profile")}>
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => setTab("Profile")}
+        >
           <img
-            src={`https://gateway.pinata.cloud/ipfs${user.data.image.substring(6)}`}
+            src={`https://gateway.pinata.cloud/ipfs${user?.data?.image?.substring(
+              6
+            )}`}
             alt=""
             className="w-12 h-12 rounded-full"
           ></img>
-          <p className="font-bold text-lg">{user.data.name}</p>
+          <p className="font-bold text-lg">{user?.data?.name}</p>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

@@ -74,6 +74,7 @@ const Sidebar = () => {
     setAccount("");
     setProvider(null);
     setUser(null);
+    router.push("create-user");
   };
   return (
     <div className="border h-screen sticky top-0 flex flex-col">
