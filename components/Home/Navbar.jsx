@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <div className="border h-[90px] top-0 bg-white flex justify-end items-center z-40">
       <div className="mr-14 flex gap-5">
-        <div className="p-3 bg-slate-200 rounded-full">
+        <div className="p-3 bg-slate-200 rounded-full" onClick={() => setTab("Notifications")}>
           <Tooltip title="Notifications">
             <BellRing />
           </Tooltip>

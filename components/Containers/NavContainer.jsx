@@ -35,15 +35,15 @@ const NavContainer = () => {
   return (
     <div>
       <Navbar />
-      <div className="grid grid-cols-[1fr,350px] px-14 py-8 bg-gray-200 h-[calc(100vh-90px)] gap-14 overflow-scroll">
-        {tab === "Home" && <PostSection posts={posts}/>}
-        {tab === "Trending" && <Trending/>}
-        {tab === "Profile" && <Profile/>}
-        {tab === "Settings" && <ComingSoon/>}
-        {tab === "Messages" && <ComingSoon/>}
-        {tab === "Bookmarks" && <ComingSoon/>}
-        {tab === "Notifications" && <ComingSoon/>}
-        {tab === "Analytics" && <Analytics/>}
+      <div className="grid grid-cols-[1fr,350px] px-14 py-8 bg-gray-200 h-[calc(100vh-90px)] gap-14 overflow-scroll scrollbar-none">
+        {tab === "Home" && <PostSection posts={posts} />}
+        {tab === "Trending" && <Trending />}
+        {tab === "Profile" && <Profile />}
+        {tab === "Settings" && <ComingSoon />}
+        {tab === "Messages" && <ComingSoon />}
+        {tab === "Bookmarks" && <ComingSoon />}
+        {tab === "Notifications" && <ComingSoon />}
+        {tab === "Analytics" && <Analytics />}
         <SuggestionSection />
       </div>
     </div>
