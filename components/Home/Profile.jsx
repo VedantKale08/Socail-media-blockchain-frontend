@@ -5,10 +5,9 @@ import toast from "react-hot-toast";
 import { userStore } from "@/store/userStore";
 
 const Profile = () => {
-   const [posts, setPosts] = useState([]);
-   const [likes, setLikes] = useState(0);
+  const [posts, setPosts] = useState([]);
+  const [likes, setLikes] = useState(0);
   const user = userStore((state) => state.user);
-  const setUser = userStore((state) => state.setUser);
 
   useEffect(() => {
     const getData = async () => {
@@ -18,7 +17,7 @@ const Profile = () => {
           url: `http://localhost:5000/api/users/${user.data.userId}/total-likes`,
         });
 
-        setLikes(data.data.totalLikesCount);           
+        setLikes(data.data.totalLikesCount);
       } catch (error) {
         toast.error(error.error);
         console.log(error);
@@ -27,23 +26,23 @@ const Profile = () => {
     getData();
   }, []);
 
-   useEffect(() => {
-     const getData = async () => {
-       try {
-         const data = await axios({
-           method: "get",
-           url: "http://localhost:5000/api/posts/0x7385693aC30c600147491d01a30c9Da3a0f79481",
-         });
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await axios({
+          method: "get",
+          url: "http://localhost:5000/api/posts/0x7385693aC30c600147491d01a30c9Da3a0f79481",
+        });
 
-         console.log(data.data);
-         setPosts(data.data);
-       } catch (error) {
-         toast.error(error.error);
-         console.log(error);
-       }
-     };
-     getData();
-   }, []);
+        console.log(data.data);
+        setPosts(data.data);
+      } catch (error) {
+        toast.error(error.error);
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
 
   return (
     <div className="flex flex-col">

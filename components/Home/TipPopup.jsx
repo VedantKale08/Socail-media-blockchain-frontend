@@ -1,22 +1,33 @@
 import React, { useState } from "react";
 import PopupContainer from "../Containers/PopUpContainer";
-import Image from "next/image";
 import { Tooltip, Button } from "@mui/material";
 import { contractStore } from "@/store/contract";
+import { ethers } from "ethers";
 
-const TipPopup = ({ post }) => {
-  const [popup, setPopup] = useState(false);
-  const [desc, setDesc] = useState("");
+const TipPopup = ({ post, setPopup }) => {
+  const [ether, setEther] = useState("");
   const contract = contractStore((state) => state.contract);
   console.log(post);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await contract.rewardEngagement(post?.userId);
-      setPopup(false);
+      if (!window.ethereum) throw new Error("No wallet");
+      else if (ether >= 1) console.error("Insufficient funds");
+      else {
+        await window.ethereum.send("eth_requestAccounts");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const tx = await signer.sendTransaction({
+          to: post.userId,
+          value: ethers.utils.parseEther(ether),
+        });
+        // console.log({ ether, addr });
+        setPopup(false);
+        console.log("tx", tx);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   };
 
@@ -34,8 +45,8 @@ const TipPopup = ({ post }) => {
             placeholder="What's new ?!"
             rows={13}
             className="w-full p-4 outline-none bg-slate-100 rounded-lg"
-            onChange={(e) => setDesc(e.target.value)}
-            value={desc}
+            onChange={(e) => setEther(e.target.value)}
+            value={ether}
           />
         </div>
         <div className="mt-3 flex justify-between items-center">

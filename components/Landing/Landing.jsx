@@ -23,37 +23,33 @@ const Landing = () => {
   };
 
   const connectWallet = async () => {
-    const localProvider = new ethers.BrowserProvider(window.ethereum);
-    if (localProvider) {
-      // To handle the account changes in the metamask wallet
-      // window.ethereum.on("chainChanged", () => {
-      //   window.location.reload();
-      // });
+    if (window.ethereum) {
+      try {
+        await window.ethereum.send("eth_requestAccounts");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        console.log(address);
+        setAccount(address);
 
-      // window.ethereum.on("accountsChanged", () => {
-      //   window.location.reload();
-      // });
+        const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+        const localContract = new ethers.Contract(
+          contractAddress,
+          SocialMedia.abi,
+          signer
+        );
 
-      await localProvider.send("eth_requestAccounts", []);
-      const signer = await localProvider.getSigner();
-      const address = await signer.getAddress();
-      console.log(address);
-      setAccount(address);
-      let contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-
-      const localContract = new ethers.Contract(
-        contractAddress,
-        SocialMedia.abi,
-        signer
-      );
-      // await contract.login();
-      setContract(localContract);
-      console.log("Contract", localContract);
-      setProvider(localProvider);
-
-      router.push("create-user");
+        setContract(localContract);
+        console.log("Contract", localContract);
+        setProvider(provider);
+        router.push("/create-user");
+      } catch (error) {
+        console.error(error);
+        // Handle error
+      }
     } else {
-      toast.error("Metamask is not installed!!!!");
+      console.error("Metamask is not installed!!!!");
+      // Handle no Metamask error
     }
   };
 

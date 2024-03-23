@@ -15,9 +15,10 @@ import {
 import { Button } from "@mui/material";
 import { tabsStore } from "@/store/tabState";
 import AddPost from "./AddPost";
-import { contractStore } from "@/store/contract";
+import { accountStore, contractStore, providerStore } from "@/store/contract";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { userStore } from "@/store/userStore";
 
 const Sidebar = () => {
   const [popup, setPopup] = useState(false);
@@ -25,6 +26,10 @@ const Sidebar = () => {
   const tab = tabsStore((state) => state.tab);
   const contract = contractStore((state) => state.contract);
   const router = useRouter();
+  const setContract = contractStore((state) => state.setContract);
+  const setAccount = accountStore((state) => state.setAccount);
+  const setProvider = providerStore((state) => state.setProvider);
+  const setUser = userStore((state) => state.setUser);
   const tabs = useMemo(
     () => [
       {
@@ -60,14 +65,10 @@ const Sidebar = () => {
   );
 
   const logoutUser = async () => {
-    console.log("Hello");
-    try {
-      await contract.logout();
-      router.push("create-user");
-    } catch (error) {
-      toast.error("Unable to logout");
-      console.log(error);
-    }
+    setContract(null);
+    setAccount("");
+    setProvider(null);
+    setUser(null);
   };
   return (
     <div className="border h-screen sticky top-0 flex flex-col">
