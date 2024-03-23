@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Lottie from "react-lottie";
 import { ethers } from "ethers";
 import * as animationData from "@/public/assets/lottie/landing.json";
@@ -7,11 +7,15 @@ import { Button } from "@mui/material";
 import SocialMedia from "../../app/artifacts/contracts/SocialMedia.sol/SocialMedia.json";
 import { useRouter } from "next/navigation";
 import { accountStore, contractStore, providerStore } from "@/store/contract";
+import axios from "axios";
+import { userStore } from "@/store/userStore";
 
 const Landing = () => {
   const setContract = contractStore((state) => state.setContract);
   const setAccount = accountStore((state) => state.setAccount);
+  const account = accountStore((state) => state.account);
   const setProvider = providerStore((state) => state.setProvider);
+  const setUser = userStore((state) => state.setUser);
   const router = useRouter();
   const defaultOptions = {
     loop: true,
@@ -21,6 +25,12 @@ const Landing = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+    useEffect(() => {
+      if (account) {
+        router.push("/home");
+      }
+    }, []);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -33,7 +43,18 @@ const Landing = () => {
         setAccount(address);
 
         const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-        router.push("/create-user");
+        const data = await axios({
+          method: "get",
+          url: "http://localhost:5000/api/user/" + address,
+        });
+
+        if(data.data.data){
+          setUser(data.data);
+          router.push("/home");
+        }else{
+          router.push("/create-user");
+        }
+
         const localContract = new ethers.Contract(
           contractAddress,
           SocialMedia.abi,
@@ -43,12 +64,6 @@ const Landing = () => {
         console.log("Contract", localContract);
         setProvider(provider);
 
-        const data = await axios({
-          method: "get",
-          url: "http://localhost:5000/api/user/" + address,
-        });
-
-        console.log(data);
 
         // router.push("/create-user");
       } catch (error) {

@@ -3,12 +3,19 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Home/Sidebar";
 import NavContainer from "./NavContainer";
 import { accountStore, contractStore } from "@/store/contract";
+import { useRouter } from "next/navigation";
 
 const ParentContainer = () => {
   const contract = contractStore((state) => state.contract);
   const account = accountStore((state) => state.account);
   const [data, setData] = useState(null);
+  const router = useRouter();
+  
   useEffect(() => {
+    if(!account){
+      router.push("/");
+    }
+
     console.log(contract, account);
     const fetchUserData = async () => {
       console.log(contract, account);
