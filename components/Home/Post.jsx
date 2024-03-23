@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { userStore } from "@/store/userStore";
 import TipPopup from "./TipPopup";
+import { useRouter } from "next/navigation";
 
 const Post = ({ post }) => {
   const user = userStore((state) => state.user);
@@ -13,6 +14,7 @@ const Post = ({ post }) => {
   const [allComments, setAllComments] = useState(post.comments);
   const [comment, setComment] = useState("");
   const [popup, setPopup] = useState(false);
+  const router = useRouter();
 
   const likePost = async () => {
     try {
@@ -70,6 +72,21 @@ const Post = ({ post }) => {
     }
   };
 
+  const clickPost = async () => {
+    try {
+      const data = await axios({
+        method: "post",
+        url: `http://localhost:5000/api/post/${post._id}/clicks`,
+      });
+      console.log(data.data);
+
+      setLikes(data.data.totalLikesCount);
+    } catch (error) {
+      toast.error(error.error);
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-3 bg-white rounded-lg shadow-md  p-8">
       {/* user section */}
@@ -88,29 +105,41 @@ const Post = ({ post }) => {
       </div>
 
       {/* content section */}
-      <p className="break-all">{post.description}</p>
-      {post.contentType === "image" ? (
-        <img
-          src={
-            !post.content.startsWith("ipfs")
-              ? post.content
-              : `https://gateway.pinata.cloud/ipfs${post.content.substring(6)}`
+      <div
+        className={`${post?.url ? "cursor-pointer" : ""}`}
+        onClick={() => {
+          if (post?.url) {
+            clickPost();
+            router.push(post?.url);
           }
-          alt=""
-          className="rounded-lg w-[80%] m-auto"
-        />
-      ) : (
-        <ReactPlayer
-          url="/assets/images/video.mp4"
-          playing
-          muted
-          loop
-          controls={false}
-          light={false}
-          pip={true}
-          style={{ width: "80%", margin: "auto" }}
-        />
-      )}
+        }}
+      >
+        <p className="break-all">{post.description}</p>
+        {post.contentType === "image" ? (
+          <img
+            src={
+              !post.content.startsWith("ipfs")
+                ? post.content
+                : `https://gateway.pinata.cloud/ipfs${post.content.substring(
+                    6
+                  )}`
+            }
+            alt=""
+            className="rounded-lg w-[80%] m-auto mt-5"
+          />
+        ) : (
+          <ReactPlayer
+            url="/assets/images/video.mp4"
+            playing
+            muted
+            loop
+            controls={false}
+            light={false}
+            pip={true}
+            style={{ width: "80%", margin: "auto" }}
+          />
+        )}
+      </div>
 
       {/* interaction section */}
       <div className="mt-3 flex justify-between items-center">

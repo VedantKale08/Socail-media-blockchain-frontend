@@ -3,16 +3,19 @@ import PopupContainer from "../Containers/PopUpContainer";
 import AvatarReg from "../../public/assets/images/user.png";
 import Image from "next/image";
 import { Tooltip, Button } from "@mui/material";
-import { ImagePlus } from "lucide-react";
+import { ImagePlus, Link } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { accountStore } from "@/store/contract";
+import { userStore } from "@/store/userStore";
 
 const AddPost = ({ setPopup }) => {
+  const user = userStore((state) => state.user);
   // const contract = contractStore((state) => state.contract);
   const account = accountStore((state) => state.account);
   const [desc, setDesc] = useState("");
+  const [url, setUrl] = useState("");
 
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("No image selected");
@@ -49,8 +52,14 @@ const AddPost = ({ setPopup }) => {
               contentType: "image",
               content: imageHash,
               description: desc,
+              url: url,
+              clicks: 0,
             },
           });
+
+          console.log(data);
+          setPopup(false);
+          window.location.reload();
 
           console.log(data);
           setPopup(false);
@@ -84,12 +93,14 @@ const AddPost = ({ setPopup }) => {
         className="w-[40vw] h-fit bg-white rounded-lg p-8"
       >
         <div className="flex gap-2 items-center">
-          <Image
-            src={AvatarReg}
+          <img
+            src={`https://gateway.pinata.cloud/ipfs${user.data.image.substring(
+              6
+            )}`}
             alt=""
             className="w-12 h-12 cursor-pointer rounded-full"
-          ></Image>
-          <p className="font-bold text-lg">Code of Duty</p>
+          ></img>
+          <p className="font-bold text-lg">{user.data.name}</p>
         </div>
         <div className="flex gap-2 flex-col mt-7">
           <label htmlFor="name" className="text-lg font-semibold">
@@ -101,7 +112,7 @@ const AddPost = ({ setPopup }) => {
             className="w-full p-4 outline-none bg-slate-100 rounded-lg"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
-          ></textarea>
+          />
           {file && (
             <Image
               src={URL.createObjectURL(file)}
@@ -111,6 +122,16 @@ const AddPost = ({ setPopup }) => {
               className="w-full h-24 cursor-pointer object-cover bg-center"
             />
           )}
+        </div>
+        <div className="flex items-center border-b">
+          <Link className="text-gray-600" />
+          <input
+            type="text"
+            placeholder="Enter link...."
+            className="outline-none w-full px-3 py-2 text-lg"
+            onChange={(e) => setUrl(e.target.value)}
+            value={url}
+          />
         </div>
         <div className="mt-3 flex justify-between items-center">
           <Tooltip title="Add Content" className="relative cursor-pointer">

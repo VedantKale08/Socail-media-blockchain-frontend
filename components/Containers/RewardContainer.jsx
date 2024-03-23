@@ -34,6 +34,15 @@ const RewardContainer = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (user && user.data.followers >= 50 && user.data.followers % 50 === 0) {
+      setPopup(true);
+      setText(
+        `You got 0.03 ethers for gaining ${user.data.followers} followers`
+      );
+    }
+  }, []);
+
   return (
     <div>
       {children}

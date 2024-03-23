@@ -11,6 +11,7 @@ import {
   BellRing,
   MessageSquareMore,
   Album,
+  ScatterChart,
 } from "lucide-react";
 import { Button } from "@mui/material";
 import { tabsStore } from "@/store/tabState";
@@ -55,6 +56,10 @@ const Sidebar = () => {
       {
         name: "Notifications",
         icon: BellRing,
+      },
+      {
+        name: "Analytics",
+        icon: ScatterChart,
       },
       {
         name: "Settings",

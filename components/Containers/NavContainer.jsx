@@ -7,6 +7,7 @@ import PostSection from '../Home/PostSection';
 import Trending from '../Home/Trending';
 import ComingSoon from '../Home/ComingSoon';
 import Profile from '../Home/Profile';
+import Analytics from '../Home/Analytics';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
@@ -42,6 +43,7 @@ const NavContainer = () => {
         {tab === "Messages" && <ComingSoon/>}
         {tab === "Bookmarks" && <ComingSoon/>}
         {tab === "Notifications" && <ComingSoon/>}
+        {tab === "Analytics" && <Analytics/>}
         <SuggestionSection />
       </div>
     </div>
