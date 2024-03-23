@@ -2,7 +2,7 @@
 import React, { useMemo,useState } from "react";
 import DenZLogo from "../../public/assets/images/logo.png";
 import Image from "next/image";
-import { Home, TrendingUp, User, Settings, LogOut, BellRing,MessageSquareMore,Album} from "lucide-react";
+import { Home, TrendingUp, User, Settings, LogOut, BellRing,MessageSquareMore,Album,ScatterChart} from "lucide-react";
 import { Button } from "@mui/material";
 import { tabsStore } from "@/store/tabState";
 import AddPost from "./AddPost";
@@ -36,6 +36,10 @@ const Sidebar = () => {
       {
         name: "Notifications",
         icon: BellRing,
+      },
+      {
+        name: "Analytics",
+        icon: ScatterChart,
       },
       {
         name: "Settings",
