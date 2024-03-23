@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Heart, Share2, MessageCircleMore } from "lucide-react";
+import { Heart, Share2, MessageCircleMore, HandCoins } from "lucide-react";
 import ReactPlayer from "react-player";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { userStore } from "@/store/userStore";
+import TipPopup from "./TipPopup";
 import { useRouter } from "next/navigation";
 import { accountStore } from "@/store/contract";
 
@@ -13,6 +14,7 @@ const Post = ({ post }) => {
   const [likes, setLikes] = useState(post.likes.length);
   const [allComments, setAllComments] = useState(post.comments);
   const [comment, setComment] = useState("");
+  const [popup, setPopup] = useState(false);
   const router = useRouter();
   const account = accountStore((state) => state.account);
 
@@ -91,14 +93,14 @@ const Post = ({ post }) => {
       {/* user section */}
       <div className="flex gap-4">
         <img
-          src={`https://gateway.pinata.cloud/ipfs${post.user.image.substring(
+          src={`https://gateway.pinata.cloud/ipfs${post.user?.image.substring(
             6
           )}`}
           alt=""
           className="w-12 h-12 cursor-pointer rounded-full object-cover"
         ></img>
         <div className="flex-1 flex flex-col gap-1 ">
-          <p className="font-semibold">{post.user.name}</p>
+          <p className="font-semibold">{post.user?.name}</p>
           <p className="text-sm text-slate-400">4 Posts</p>
         </div>
       </div>
@@ -162,6 +164,11 @@ const Post = ({ post }) => {
           <p>{likes} others like this post</p>
         </div>
         <div className="flex gap-3">
+          <HandCoins
+            size={32}
+            className="cursor-pointer"
+            onClick={() => setPopup(true)}
+          />
           <MessageCircleMore
             size={32}
             className="cursor-pointer"
@@ -211,6 +218,7 @@ const Post = ({ post }) => {
             ))}
         </div>
       )}
+      {popup && <TipPopup setPopup={setPopup} post={post} />}
     </div>
   );
 };

@@ -3,8 +3,10 @@ import PopupContainer from "../Containers/PopUpContainer";
 import Lottie from "react-lottie";
 import * as animationData from "@/public/assets/lottie/reward.json";
 import { Button } from "@mui/material";
+import { accountStore, contractStore } from "@/store/contract";
+import { ethers } from "ethers";
 
-const RewardPopup = ({ setPopup,text }) => {
+const RewardPopup = ({ setPopup, text }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -12,6 +14,27 @@ const RewardPopup = ({ setPopup,text }) => {
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
+  };
+
+  const contract = contractStore((state) => state.contract);
+  const account = accountStore((state) => state.account);
+
+  const rewardUser = async ({ ether, addr }) => {
+    try {
+      if (!window.ethereum) throw new Error("No wallet");
+
+      await window.ethereum.send("eth_requestAccounts");
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const tx = await signer.sendTransaction({
+        to: addr,
+        value: ethers.utils.parseEther(ether),
+      });
+      console.log({ ether, addr });
+      console.log("tx", tx);
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
 
   return (
@@ -32,7 +55,12 @@ const RewardPopup = ({ setPopup,text }) => {
             fontWeight: "semibold",
             width: "100%",
           }}
-          onClick={() => setPopup(false)}
+          onClick={() =>
+            rewardUser({
+              ether: "0.002",
+              addr: "0xdb159108EBE9A4857FA4ea88D87991dE0D374b1d",
+            })
+          }
         >
           Claim
         </Button>
