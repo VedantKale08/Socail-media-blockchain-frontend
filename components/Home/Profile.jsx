@@ -51,16 +51,16 @@ const Profile = () => {
       <div className="flex flex-col gap-3 bg-white rounded-lg shadow-md p-8 h-fit">
         <div className="flex gap-7">
           <img
-            src={`https://gateway.pinata.cloud/ipfs${user.data.image.substring(
+            src={`https://gateway.pinata.cloud/ipfs${user?.data?.image.substring(
               6
             )}`}
             alt=""
             className="w-32 h-32 cursor-pointer rounded-full object-cover"
           ></img>
           <div className="flex-1 flex flex-col gap-1 justify-center">
-            <p className="font-semibold text-3xl">{user.data.name}</p>
+            <p className="font-semibold text-3xl">{user?.data?.name}</p>
             <p className="text-sm text-slate-400 text-xl">
-              {user.totalPosts} Posts &#46; {user.data.followers} Followers
+              {user?.totalPosts} Posts &#46; {user?.data?.followers} Followers
               &#46; {likes} Total likes
             </p>
           </div>
